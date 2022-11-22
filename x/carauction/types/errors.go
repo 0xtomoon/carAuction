@@ -8,5 +8,9 @@ import (
 
 // x/carauction module sentinel errors
 var (
-	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	ErrInvalidWinner 	= sdkerrors.Register(ModuleName, 3, "Winner address is invalid: %s")
+	ErrInvalidBidAmount = sdkerrors.Register(ModuleName, 4, "Invalid Bid Amount")
+	ErrLowBidAmount		= sdkerrors.Register(ModuleName, 5, "Bid amount is lower than the current price")
+	ErrAuctionNotFound	= sdkerrors.Register(ModuleName, 6, "Auction not found")
+	ErrAuctionEnded		= sdkerrors.Register(ModuleName, 7, "Auction is ended")
 )

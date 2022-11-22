@@ -4,9 +4,13 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgCreateAuction } from "./types/carauction/tx";
+import { MsgPlaceBid } from "./types/carauction/tx";
 
 
 const types = [
+  ["/carauction.carauction.MsgCreateAuction", MsgCreateAuction],
+  ["/carauction.carauction.MsgPlaceBid", MsgPlaceBid],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -39,6 +43,8 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgCreateAuction: (data: MsgCreateAuction): EncodeObject => ({ typeUrl: "/carauction.carauction.MsgCreateAuction", value: MsgCreateAuction.fromPartial( data ) }),
+    msgPlaceBid: (data: MsgPlaceBid): EncodeObject => ({ typeUrl: "/carauction.carauction.MsgPlaceBid", value: MsgPlaceBid.fromPartial( data ) }),
     
   };
 };

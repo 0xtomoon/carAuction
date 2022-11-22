@@ -1,0 +1,15 @@
+syntax = "proto3";
+package carauction.carauction;
+
+option go_package = "carAuction/x/carauction/types";
+
+message BaseAuction {
+  string index = 1; 
+  string carLabel = 2;
+  uint64 maxBid = 3; 
+  string winner = 4; 
+  int64 blockNumber = 5; 
+  bool ended = 6; 
+  
+}
+

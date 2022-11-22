@@ -13,17 +13,21 @@ ignite chain serve
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
-### Web Frontend
+## Chain CLI
 
-Ignite CLI has scaffolded a Vue.js-based web app in the `vue` directory. Run the following commands to install dependencies and start the app:
-
+### Create Auction
 ```
-cd vue
-npm install
-npm run serve
+./carAuctiond tx carauction create-auction <CarLabel> --from alice --gas auto
 ```
-
-The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite-hq/web).
+### Place Bid
+```
+./carAuctiond tx carauction place-bid <Auction ID> <Bid Amount> --from bob --gas auto
+```
+### Query
+```
+./carAuctiond query carauction list-base-auction
+./carAuctiond query carauction list-base-bid
+```
 
 ## Release
 To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.

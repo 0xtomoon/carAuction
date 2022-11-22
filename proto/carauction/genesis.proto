@@ -3,6 +3,9 @@ package carauction.carauction;
 
 import "gogoproto/gogo.proto";
 import "carauction/params.proto";
+import "carauction/system_info.proto";
+import "carauction/base_auction.proto";
+import "carauction/base_bid.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "carAuction/x/carauction/types";
@@ -10,5 +13,8 @@ option go_package = "carAuction/x/carauction/types";
 // GenesisState defines the carauction module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  SystemInfo systemInfo = 2 [(gogoproto.nullable) = false];
+  repeated BaseAuction baseAuctionList = 3 [(gogoproto.nullable) = false];
+  repeated BaseBid baseBidList = 4 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

@@ -1,0 +1,24 @@
+syntax = "proto3";
+package carauction.carauction;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "carAuction/x/carauction/types";
+
+message AuctionCreated {
+    string creator = 1;
+    string auctionId = 2;
+}
+
+message PlacedBid {
+    string creator = 1;
+    string auctionId = 2;
+    uint64 amount = 3;
+}
+
+message AuctionEnded {
+    string auctionId = 1;
+    string carLabel = 2;
+    uint64 bidAmount = 3;
+    string winner = 4;
+}

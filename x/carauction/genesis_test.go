@@ -14,6 +14,26 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		SystemInfo: &types.SystemInfo{
+			AuctionId: 23,
+			BidId:     39,
+		},
+		BaseAuctionList: []types.BaseAuction{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		BaseBidList: []types.BaseBid{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +45,8 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.Equal(t, genesisState.SystemInfo, got.SystemInfo)
+	require.ElementsMatch(t, genesisState.BaseAuctionList, got.BaseAuctionList)
+	require.ElementsMatch(t, genesisState.BaseBidList, got.BaseBidList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

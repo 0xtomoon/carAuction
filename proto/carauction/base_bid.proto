@@ -1,0 +1,14 @@
+syntax = "proto3";
+package carauction.carauction;
+
+option go_package = "carAuction/x/carauction/types";
+
+message BaseBid {
+  string index = 1; 
+  string auctionId = 2; 
+  string bidder = 3; 
+  uint64 amount = 4; 
+  int64 bidTime = 5; 
+  
+}
+

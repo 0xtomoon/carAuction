@@ -5,6 +5,9 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "carauction/params.proto";
+import "carauction/system_info.proto";
+import "carauction/base_auction.proto";
+import "carauction/base_bid.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "carAuction/x/carauction/types";
@@ -15,7 +18,31 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/carAuction/carauction/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a SystemInfo by index.
+	rpc SystemInfo(QueryGetSystemInfoRequest) returns (QueryGetSystemInfoResponse) {
+		option (google.api.http).get = "/carAuction/carauction/system_info";
+	}
+// Queries a BaseAuction by index.
+	rpc BaseAuction(QueryGetBaseAuctionRequest) returns (QueryGetBaseAuctionResponse) {
+		option (google.api.http).get = "/carAuction/carauction/base_auction/{index}";
+	}
+
+	// Queries a list of BaseAuction items.
+	rpc BaseAuctionAll(QueryAllBaseAuctionRequest) returns (QueryAllBaseAuctionResponse) {
+		option (google.api.http).get = "/carAuction/carauction/base_auction";
+	}
+
+// Queries a BaseBid by index.
+	rpc BaseBid(QueryGetBaseBidRequest) returns (QueryGetBaseBidResponse) {
+		option (google.api.http).get = "/carAuction/carauction/base_bid/{index}";
+	}
+
+	// Queries a list of BaseBid items.
+	rpc BaseBidAll(QueryAllBaseBidRequest) returns (QueryAllBaseBidResponse) {
+		option (google.api.http).get = "/carAuction/carauction/base_bid";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +52,47 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetSystemInfoRequest {}
+
+message QueryGetSystemInfoResponse {
+	SystemInfo SystemInfo = 1 [(gogoproto.nullable) = false];
+}
+message QueryGetBaseAuctionRequest {
+	  string index = 1;
+
+}
+
+message QueryGetBaseAuctionResponse {
+	BaseAuction baseAuction = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBaseAuctionRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBaseAuctionResponse {
+	repeated BaseAuction baseAuction = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetBaseBidRequest {
+	  string index = 1;
+
+}
+
+message QueryGetBaseBidResponse {
+	BaseBid baseBid = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBaseBidRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBaseBidResponse {
+	repeated BaseBid baseBid = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
